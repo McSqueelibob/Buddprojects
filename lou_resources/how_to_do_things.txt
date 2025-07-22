@@ -1,0 +1,6 @@
+sudo systemctl start apache2
+
+winscp
+/home/josh/Documents
+
+mv /home/josh/Documents/*file* /var/www/html/lou
