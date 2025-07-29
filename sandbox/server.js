@@ -1,13 +1,33 @@
-const express = require('express');  // 1. Express library for building web servers
-const app = express();               // 2. Create an Express application instance
-const PORT = 3000;                  // 3. Port number the server will listen on
+const express = require('express')
+const fs = require('fs');
+const app = express()
+const cors = require('cors');
+const port = 3000
 
-// 4. Define a GET route handler for the root URL ('/')
-app.get('/', (req, res) => {
-  res.send('Hello World!');         // 5. Send back a simple text response
+app.use(express.json());
+app.use(cors());
+
+app.post('/save-json', (req, res) => {
+  const jsonData = req.body;
+
+  fs.writeFile('data.json', JSON.stringify(jsonData, null, 2), (err) => {
+    if (err) {
+      console.error('Failed to write file:', err);
+      return res.status(500).send('Error writing file');
+    }
+    res.send('JSON data saved successfully!');
+  });
 });
 
-// 6. Start the server listening on the specified port
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+//app.get('/', (req, res) => {
+//  res.send('<h1>Hello World!</h1>')
+//})
+
+app.get('sandbox/test', (req, res) => {
+  res.send('This is the test page');
 });
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
+
