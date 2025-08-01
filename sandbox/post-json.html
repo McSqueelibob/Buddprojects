@@ -21,7 +21,7 @@
       const title = document.getElementById('title').value;
       const body = document.getElementById('body').value;
 
-      const response = await fetch('http://192.168.1.100:3000/save-json-ts', {
+      const response = await fetch('http://192.168.1.100:3000/api/save-json-ts', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -36,7 +36,7 @@
       }
     });
     function bobData() {
-      fetch('http://192.168.1.100:3000/save-json', {
+      fetch('http://192.168.1.100:3000/api/save-json', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: 'Bob', age: 25 })
