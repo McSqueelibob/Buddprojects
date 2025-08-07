@@ -8,7 +8,7 @@ const port = 3000
 app.use(express.json());
 app.use(cors());
 
-const DATA_DIR = path.join(__dirname, 'json_files');
+const DATA_DIR = path.join(__dirname, 'excerpts');
 
 // API to list JSON files
 app.get('/api/files', (req, res) => {
