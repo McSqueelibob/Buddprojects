@@ -30,40 +30,21 @@ app.get('/api/files/:filename', (req, res) => {
   });
 });
 
-app.post('/api/save-json-ts', (req, res) => {
+// API to save a JSON file
+app.post('/api/save-json', (req, res) => {
   const jsonData = req.body;
   const timeStamp = jsonData.timeStamp;
 
-  fs.writeFile('json_files/' + timeStamp + '.json', JSON.stringify(jsonData, null, 2), (err) => {
+  fs.writeFile('excerpts/' + timeStamp + '.json', JSON.stringify(jsonData, null, 2), (err) => {
     if (err) {
       console.error('Failed to write file:', err);
       return res.status(500).send('Error writing file');
     }
-    res.send('JSON data saved successfully!');
+    res.send('JSON data saved successfully.');
   });
-});
-
-app.post('/api/save-json', (req, res) => {
-  const jsonData = req.body;
-
-  fs.writeFile('json_files/data.json', JSON.stringify(jsonData, null, 2), (err) => {
-    if (err) {
-      console.error('Failed to write file:', err);
-      return res.status(500).send('Error writing file');
-    }
-    res.send('JSON data saved successfully!');
-  });
-});
-
-//app.get('/', (req, res) => {
-//  res.send('<h1>Hello World!</h1>')
-//})
-
-app.get('sandbox/test', (req, res) => {
-  res.send('This is the test page');
 });
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`App listening on port ${port}`)
 })
 
