@@ -49,6 +49,7 @@
     <br>
     <p>Please be careful when inputing stuff. Currently there's no way to delete from the client side. 
     I have to manually remove the files.</p>
+    <p><i>NOTE:</i> You can't use shift enter to break up paragraphs yet... sorry.</p>
     <br>
       <form id="excerptForm">
         <input type="text" id="title" placeholder="heading"><br><br>
@@ -70,7 +71,7 @@
       const title = document.getElementById('title').value;
       const body = document.getElementById('body').value;
 
-      const response = await fetch('http://192.168.1.100:3000/api/save-json-ts', {
+      const response = await fetch('http://192.168.1.100:3000/api/save-json', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
