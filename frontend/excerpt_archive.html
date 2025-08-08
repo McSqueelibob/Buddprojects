@@ -7,7 +7,6 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
   </head>
   <body>
 
@@ -66,11 +65,10 @@
     async function loadExcerpts() {
       
       const excerpts = document.getElementById('excerpts');
-      const res = await fetch('http://192.168.1.100:3000/api/files');
+      const res = await fetch('http://buddprojects.ddns.net:8788/api/files');
       const files = (await res.json()).reverse();
       
       for (const file of files) {
-        console.log(file);
         
         const div = document.createElement('div');
         const title = document.createElement('h6');
@@ -79,21 +77,21 @@
         const i = document.createElement('i');
         const br = document.createElement('br');
         
-        const contentRes = await fetch(`http://192.168.1.100:3000/api/files/${file}`);
+        const contentRes = await fetch(`http://buddprojects.ddns.net:8788/api/files/${file}`);
         const excerptData = await contentRes.json();
         
         title.textContent = excerptData.title;
-        text.textContent = excerptData.body;
+			text.innerHTML = excerptData.body.replace(/\n/g, '<br>') + '<br><br>Contibutor: ' + excerptData.contributor;
         i.textContent = 'time stamp: ' + excerptData.timeStamp;
         
         timeStamp.appendChild(i);
+        
         div.appendChild(title);
         div.appendChild(text);
         div.appendChild(timeStamp);
+        
         excerpts.appendChild(div);
         excerpts.appendChild(br);
-        
-        console.log(excerptData.timeStamp);
       };
     }
     

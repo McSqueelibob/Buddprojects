@@ -9,6 +9,7 @@ app.use(express.json());
 app.use(cors());
 
 const DATA_DIR = path.join(__dirname, 'excerpts');
+const TOKEN = 'eTpSacaD7PiEfm20fxb1hChv2YOj9WjJ';
 
 // API to list JSON files
 app.get('/api/files', (req, res) => {
@@ -34,6 +35,10 @@ app.get('/api/files/:filename', (req, res) => {
 app.post('/api/save-json', (req, res) => {
   const jsonData = req.body;
   const timeStamp = jsonData.timeStamp;
+
+  if (req.body.token !== TOKEN) {
+    return res.status(403).send('Forbidden');
+  }
 
   fs.writeFile('excerpts/' + timeStamp + '.json', JSON.stringify(jsonData, null, 2), (err) => {
     if (err) {

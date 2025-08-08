@@ -44,16 +44,33 @@
 	</nav>
   <!-- takes user input and saves json-->
   <div class="row">
-    <div class="col-1"></div>
-    <div class="col-10">
+    <div class="col-10 offset-1 text-break">
     <br>
     <p>Please be careful when inputing stuff. Currently there's no way to delete from the client side. 
     I have to manually remove the files.</p>
     <p><i>NOTE:</i> You can't use shift enter to break up paragraphs yet... sorry.</p>
+=======
+    <p>
+    Feel free to post anything that is good, true, or beautiful. Please be careful when inputing stuff. Currently there's no way to delete from the client side.
+    I have to manually remove the files. Also, you can put in a link using &lt;a href="https://**link**"&gt;link text&lt;/a&gt;
+    This isn't necessary; you could paste the plain text, but it won't have the cute blue that you can click.
+    It will just appear as plain text.
+    </p>
+    <p>
+    In practice, you can write something like this in the content box:<br>
+    Look at this cool &lt;a href="https://en.wikipedia.org/wiki/Gregorian_chant"&gt;wikipedia page&lt;/a&gt;!
+    </p>
+    </p>
+    It will appear as:<br>
+    Look at this cool <a href="https://en.wikipedia.org/wiki/Gregorian_chant">wikipedia page</a>!
+    </p>
+>>>>>>> excerpt-archive
     <br>
       <form id="excerptForm">
+        <input type="text" id="token" placeholder="token"><br><br>
+        <input type="text" id="contributor" placeholder="contributor"><br><br>
         <input type="text" id="title" placeholder="heading"><br><br>
-        <textarea id="body" placeholder="content" required style="width: 500px; height: 150px; resize: both;"></textarea><br><br>
+        <textarea id="body" placeholder="content" required style="width: 80%; height: 150px; resize: both;"></textarea><br><br>
         <button type="submit">Submit</button>
       </form>
     </div>
@@ -68,22 +85,27 @@
       e.preventDefault();
 
       const timestampMs = Date.now();
+      const token = document.getElementById('token').value;
+      const contributor = document.getElementById('contributor').value;
       const title = document.getElementById('title').value;
       const body = document.getElementById('body').value;
 
-      const response = await fetch('http://192.168.1.100:3000/api/save-json', {
+      const response = await fetch('http://buddprojects.ddns.net:8788/api/save-json', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ timeStamp: timestampMs, title, body })
+        body: JSON.stringify({ timeStamp: timestampMs, title, body, contributor, token })
       });
 
       if (response.ok) {
-        alert('Excerpt saved!');
+        alert('Excerpt saved.');
       } else {
         alert('Failed to save.');
       }
+      
+      document.getElementById('title').value = "";
+      document.getElementById('body').value = "";
     });
   </script>
 </body>
