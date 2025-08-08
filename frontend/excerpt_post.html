@@ -47,8 +47,22 @@
     <div class="col-1"></div>
     <div class="col-10">
     <br>
-    <p>Please be careful when inputing stuff. Currently there's no way to delete from the client side. 
-    I have to manually remove the files.</p>
+    <p>
+    Please be careful when inputing stuff. Currently there's no way to delete from the client side. 
+    I have to manually remove the files. Also, you can put in a link using &lt;a href="https://**link**"&gt;link text&lt;/a&gt;
+    </p>
+    <p>
+    In practice, you can write something like this in the content box:<br>
+    Look at this cool &lt;a href="https://en.wikipedia.org/wiki/Gregorian_chant"&gt;wikipedia page&lt;/a&gt;!
+    </p>
+    </p>
+    It will appear as:<br>
+    Look at this cool <a href="https://en.wikipedia.org/wiki/Gregorian_chant">wikipedia page</a>!
+    </p>
+    <p>
+    <i>NOTE:</i> To those who know this stuff, I use "text.innerHTML = excerptData.body.replace(/\n/g, '&lt;br&gt;');" to load the excerpts.
+    That means you can do fun html, css, and js stuff if you so please. Your welcome.
+    </p>
     <br>
       <form id="excerptForm">
         <input type="text" id="title" placeholder="heading"><br><br>
@@ -70,7 +84,7 @@
       const title = document.getElementById('title').value;
       const body = document.getElementById('body').value;
 
-      const response = await fetch('http://192.168.1.100:3000/api/save-json-ts', {
+      const response = await fetch('http://192.168.1.100:3000/api/save-json', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -79,10 +93,13 @@
       });
 
       if (response.ok) {
-        alert('Excerpt saved!');
+        alert('Excerpt saved.');
       } else {
         alert('Failed to save.');
       }
+      
+      document.getElementById('title').value = "";
+      document.getElementById('body').value = "";
     });
   </script>
 </body>
