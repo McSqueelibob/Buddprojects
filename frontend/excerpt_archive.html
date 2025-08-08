@@ -65,7 +65,7 @@
     async function loadExcerpts() {
       
       const excerpts = document.getElementById('excerpts');
-      const res = await fetch('http://192.168.1.100:3000/api/files');
+      const res = await fetch('http://buddprojects.ddns.net:8788/api/files');
       const files = (await res.json()).reverse();
       
       for (const file of files) {
@@ -77,7 +77,7 @@
         const i = document.createElement('i');
         const br = document.createElement('br');
         
-        const contentRes = await fetch(`http://192.168.1.100:3000/api/files/${file}`);
+        const contentRes = await fetch(`http://buddprojects.ddns.net:8788/api/files/${file}`);
         const excerptData = await contentRes.json();
         
         title.textContent = excerptData.title;
