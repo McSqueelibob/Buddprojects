@@ -44,11 +44,10 @@
 	</nav>
   <!-- takes user input and saves json-->
   <div class="row">
-    <div class="col-1"></div>
-    <div class="col-10">
+    <div class="col-10 offset-1 text-break">
     <br>
     <p>
-    Please be careful when inputing stuff. Currently there's no way to delete from the client side. 
+    Feel free to post anything that is good, true, or beautiful. Please be careful when inputing stuff. Currently there's no way to delete from the client side.
     I have to manually remove the files. Also, you can put in a link using &lt;a href="https://**link**"&gt;link text&lt;/a&gt;
     This isn't necessary; you could paste the plain text, but it won't have the cute blue that you can click.
     It will just appear as plain text.
@@ -61,14 +60,12 @@
     It will appear as:<br>
     Look at this cool <a href="https://en.wikipedia.org/wiki/Gregorian_chant">wikipedia page</a>!
     </p>
-    <p>
-    <i>NOTE:</i> To those who know this stuff, I use "text.innerHTML = excerptData.body.replace(/\n/g, '&lt;br&gt;');" to load the excerpts.
-    That means you can do fun html, css, and js stuff if you so please. Your welcome.
-    </p>
     <br>
       <form id="excerptForm">
+        <input type="text" id="token" placeholder="token"><br><br>
+        <input type="text" id="contributor" placeholder="contributor"><br><br>
         <input type="text" id="title" placeholder="heading"><br><br>
-        <textarea id="body" placeholder="content" required style="width: 500px; height: 150px; resize: both;"></textarea><br><br>
+        <textarea id="body" placeholder="content" required style="width: 80%; height: 150px; resize: both;"></textarea><br><br>
         <button type="submit">Submit</button>
       </form>
     </div>
@@ -83,6 +80,8 @@
       e.preventDefault();
 
       const timestampMs = Date.now();
+      const token = document.getElementById('token').value;
+      const contributor = document.getElementById('contributor').value;
       const title = document.getElementById('title').value;
       const body = document.getElementById('body').value;
 
@@ -91,7 +90,7 @@
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ timeStamp: timestampMs, title, body })
+        body: JSON.stringify({ timeStamp: timestampMs, title, body, contributor, token })
       });
 
       if (response.ok) {

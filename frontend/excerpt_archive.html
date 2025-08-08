@@ -81,7 +81,7 @@
         const excerptData = await contentRes.json();
         
         title.textContent = excerptData.title;
-        text.innerHTML = excerptData.body.replace(/\n/g, '<br>');
+			text.innerHTML = excerptData.body.replace(/\n/g, '<br>') + '<br><br>Contibutor: ' + excerptData.contributor;
         i.textContent = 'time stamp: ' + excerptData.timeStamp;
         
         timeStamp.appendChild(i);
